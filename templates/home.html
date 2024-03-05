@@ -10,19 +10,29 @@
 <link rel="stylesheet" href="{% static 'home.css' %}" />
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const textArea = document.getElementById('Text')
-      const charCountSpan = document.getElementById('charCount')
-      const wordCountSpan = document.getElementById('wordCount')
-    
+      const textArea = document.getElementById('Text');
+      const charCountSpan = document.getElementById('charCount');
+      const wordCountSpan = document.getElementById('wordCount');
+      const form = document.querySelector('form');
+
       textArea.addEventListener('input', () => {
-        const text = textArea.value.trim()
-        const charCount = text.length
-        const wordCount = text === '' ? 0 : text.split(/\s+/).length
-    
-        charCountSpan.textContent = charCount
-        wordCountSpan.textContent = wordCount
-      })
-    })
+        const text = textArea.value.trim();
+        const charCount = text.length;
+        const wordCount = text === '' ? 0 : text.split(/\s+/).length;
+
+        charCountSpan.textContent = charCount;
+        wordCountSpan.textContent = wordCount;
+      });
+
+      form.addEventListener('submit', (event) => {
+        const text = textArea.value.trim();
+        if (text.length === 0) {
+          event.preventDefault(); // Prevent form submission
+          alert('Please enter at least one character before submitting.');
+        }
+      });
+    });
+  
   </script>
 {% endblock %}
 
